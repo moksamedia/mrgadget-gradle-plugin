@@ -28,7 +28,7 @@ repositories {
 }
 
 
-Class MrGadgetPlugin implements Plugin<Project> {
+class MrGadgetPlugin implements Plugin<Project> {
 
 	MrGadget mrg
 
