@@ -1,0 +1,54 @@
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'fatjar'
+
+version='0.1.0'
+
+buildscript {
+	dependencies {
+		classpath 'eu.appsatori:gradle-fatjar-plugin:0.1.2' // adds fatJar task
+	}
+	repositories {
+		mavenCentral()
+	}
+}
+
+dependencies {
+    compile gradleApi() ext { fatJarExclude = true }
+    groovy localGroovy() ext { fatJarExclude = true }
+	compile 'com.moksamedia:mrgadget:0.2.1:jar-with-dependencies'
+}
+
+repositories {
+	flatDir {
+		dirs "../mrgadget/build/libs"
+	}
+	mavenCentral()
+}
+
+artifacts {
+	archives jar
+	archives fatJar
+}
+
+fatJar {
+	classifier 'jar-with-dependencies'
+}
+
+// copy jar and fatJar to base project directory so they will be in git (and on github for download)
+build << {
+	
+	fatJar
+	
+	copy {
+		println "Copying ${jar.archiveName} to base directory"
+		from("$buildDir/libs/${jar.archiveName}")
+		into("$projectDir")
+	}
+	copy {
+		println "Copying ${fatJar.archiveName} to base directory"
+		from("$buildDir/libs/${fatJar.archiveName}")
+		into("$projectDir")
+	}
+	
+}
