@@ -6,10 +6,21 @@ import com.moksamedia.mrgadget.MrGadget;
 apply plugin: 'groovy'
 apply plugin: MrGadgetPlugin
 
+buildscript {
+	
+	repositories {
+		mavenCentral()
+	}
+	
+	dependencies {
+		classpath 'com.moksamedia:mrgadget:0.2.1:jar-with-dependencies'
+	}
+	
+}
+
 dependencies {
 	compile gradleApi()
 	groovy localGroovy()
-	compile 'com.moksamedia:mrgadget:0.2.1:jar-with-dependencies'
 }
 
 repositories {
