@@ -29,7 +29,7 @@ Another way is to add the 'jar-with-dependencies' to your buildscript classpath:
 		}
     
 	  dependencies {
-		classpath 'com_moksamedia:mrgadget-plugin:0.1.0:jar-with-dependencies' // the fat jar 
+		classpath 'com_moksamedia:mrgadget-plugin:<DESIRED-VERSION>:jar-with-dependencies'
 	  }
 
 	}
@@ -52,7 +52,7 @@ And yet a third way would be to add the 'light' jar to your buildscript classpat
 	  dependencies {
 		compile 'com.jcraft:jsch:0.1.48'	// JSch is the SSH java package
 		compile 'org.jasypt:jasypt-acegisecurity:1.9.0'	// for encrypting the stored passwords
-		classpath 'com_moksamedia:mrgadget-plugin:0.1.0' // the light jar
+		classpath 'com_moksamedia:mrgadget-plugin:<DESIRED-VERSION>' // the light jar
 	  }
 	
 	}
