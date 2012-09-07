@@ -2,6 +2,8 @@
 
 The MrGadget Gradle plugin is a wrapper for the MrGadget project that makes it really, really easy to use MrGadget in Gradle build scripts. MrGadget loves to do 4 things: 1) upload files to a remote server via SFTP, 2) upload files to a remote server via SCP, 3) execute commands on a remote server, and 4) execute SUDO commands on a remote server.
 
+Passwords can be passed in as parameters. If they are not, MrGadget will use the System.console to prompt the user for the required passwords, and will ask if they should be stored in the system preferences. The stored passwords are encrypted, using either an auto-generated key or a passed in encryption key. DISCLAIMER: Although the system is safer than storing passwords in plain text in a config or properties file, an interested hacker could certainly defeat the security, SO USE AT YOUR OWN RISK. 
+
 # Installation
 
 The plugin can be used in a couple ways.
@@ -59,7 +61,7 @@ And yet a third way would be to add the 'light' jar to your buildscript classpat
 
 The plugin injects a number of methods into your project.
 
-* initMrGadget() : can be called to initialize MrGadget before uploading a file or executing a command. If any action is attempted before this method has been called, it will be called automatically.
+* initMrGadget() : can be called to initialize MrGadget before uploading a file or executing a command. If any action is attempted before this method has been called, it will be called automatically. Both user and host must be set before any action can be executed. For example, you could say: initMrGadget(user:'someUser', host:'www.awesome.com'); execRemote('ls'). Or: execRemote(user:'someUser', host:'www.awesome.com', command:'ls') But if you tried the execRemote('ls') call without setting a user and host, bad things will happen.
 
 * execRemote() : executes a non-sudo command on a remote server. The most important param is the command, as a string. As in execRemote(command:'rm someFile')
 
