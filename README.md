@@ -4,8 +4,6 @@ The MrGadget Gradle plugin is a wrapper for the MrGadget project that makes it r
 
 Passwords can be passed in as parameters. If they are not, MrGadget will use the System.console to prompt the user for the required passwords, and will ask if they should be stored in the system preferences. The stored passwords are encrypted, using either an auto-generated key or a passed in encryption key. DISCLAIMER: Although the system is safer than storing passwords in plain text in a config or properties file, an interested hacker could certainly defeat the security, SO USE AT YOUR OWN RISK. 
 
-See the 'example-usage.gradle' file for example usage info.
-
 # Installation
 
 The plugin can be used in a couple ways.
@@ -60,8 +58,6 @@ And yet a third way would be to add the 'light' jar to your buildscript classpat
 	}
 
 # Usage
-
-See the 'example-usage.gradle' file for example usage info.
 
 The plugin injects a number of methods into your project.
 
