@@ -1,3 +1,5 @@
+# Description
+
 The MrGadget Gradle plugin is a wrapper for the MrGadget project that makes it really, really easy to use MrGadget in Gradle build scripts. MrGadget loves to do 4 things: 1) upload files to a remote server via SFTP, 2) upload files to a remote server via SCP, 3) execute commands on a remote server, and 4) execute SUDO commands on a remote server.
 
 # Installation
@@ -57,12 +59,12 @@ And yet a third way would be to add the 'light' jar to your buildscript classpat
 
 The plugin injects a number of methods into your project.
 
-initMrGadget() : can be called to initialize MrGadget before uploading a file or executing a command. If any action is attempted before this method has been called, it will be called automatically.
+* initMrGadget() : can be called to initialize MrGadget before uploading a file or executing a command. If any action is attempted before this method has been called, it will be called automatically.
 
-execRemote() : executes a non-sudo command on a remote server. The most important param is the command, as a string. As in execRemote(command:'rm someFile')
+* execRemote() : executes a non-sudo command on a remote server. The most important param is the command, as a string. As in execRemote(command:'rm someFile')
 
-execRemoteSudo() : executes a sudo command on a remote server. Again, use the 'command' param to pass in the command to be executed.
+* execRemoteSudo() : executes a sudo command on a remote server. Again, use the 'command' param to pass in the command to be executed.
 
-copyToRemoteSCP() : copies a local file to a remote server using SCP. A full path to a local file (localFile) and remote file (remoteFile) must be specified, such as copyToRemoteSCP(localFile:'/path/to/some/file.jar', remoteFile:'path/on/remote/server/file_deployed.jar')
+* copyToRemoteSCP() : copies a local file to a remote server using SCP. A full path to a local file (localFile) and remote file (remoteFile) must be specified, such as copyToRemoteSCP(localFile:'/path/to/some/file.jar', remoteFile:'path/on/remote/server/file_deployed.jar')
 
-copyToRemoteSFTP() : the same as copyToRemoteSCP but uses the SFTP protocol instead of the SCP protocol.
+* copyToRemoteSFTP() : the same as copyToRemoteSCP but uses the SFTP protocol instead of the SCP protocol.
