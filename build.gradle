@@ -20,7 +20,7 @@ dependencies {
 }
 
 repositories {
-x	mavenCentral()
+	mavenCentral()
 }
 
 artifacts {
