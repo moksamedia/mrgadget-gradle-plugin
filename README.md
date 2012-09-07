@@ -83,12 +83,17 @@ MrGadget can be configured via an extension block in your buildscript. These val
 
 	mrgadget {
 
+		// REQUIRED (but could be set as params to method calls as well)
+
 		user = 'someUser'  // the username used to log into the server
 		host = '123.23.1.15'  // the ip address of host of the remote server
 	
-		prefsEncryptionKey = "some-random-chars"// optional: string key used to encrypt any stored passwords
-		password = "mypass" // optional: can directly pass in the password, if you like
-		sudoPassword = "mySudoPass" // optional: // if sudo password is different than login password, can pass it in also
+		// OPTIONAL
+	
+		prefsEncryptionKey = "some-random-chars"// string key used to encrypt any stored passwords
+		password = "mypass" // can directly pass in the password, if you like
+		sudoPassword = "mySudoPass" // if sudo password is different than login password, can pass it in also
 
-		logProgressGranularity = 20 // optional: use this to set the frequency, in percentage, that MrGadget log.info's file transfer progress (less = more reporting, value should be an integer between 0 and 100)
+		logProgressGranularity = 20 // use this to set the frequency, in percentage, that MrGadget log.info's file transfer
+								    // progress (less = more reporting, value should be an integer between 0 and 100)
 	}
