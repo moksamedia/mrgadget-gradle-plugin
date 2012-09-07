@@ -94,6 +94,27 @@ MrGadget can be configured via an extension block in your buildscript. These val
 		password = "mypass" // can directly pass in the password, if you like
 		sudoPassword = "mySudoPass" // if sudo password is different than login password, can pass it in also
 
-		logProgressGranularity = 20 // use this to set the frequency, in percentage, that MrGadget log.info's file transfer
+		logProgressGranularity = 10 // use this to set the frequency, in percentage, that MrGadget log.info's file transfer
 								    // progress (less = more reporting, value should be an integer between 0 and 100)
+								
+		leaveSessionOpen = false // set this to true if you're gonna execute a few commands in a row, but don't forget to close session
+		
+		promptToSavePass = true  // set to false and MrGadget won't ask you if you'd like to save your password
+		
+		strictHostKeyChecking = true  // set to false if you want to bypass strict host key checking
+		
+		showProgressDialog = true  // set to false to suppress showing the Swing progress dialog box during file transfers (useful
+								   // for slow connections or BIG files, but not worth it for quick transfers)
+		
+		preserveTimeStamp = false  // set to true if you want MrGadget to set the timestamp of the remote file to the modified time of
+						 		   // the local file
+
+		// These can be used to change the names of the injected execution methods, in case they 
+		// happen to conflict with something
+
+		execRemoteMethodName = "execRemote"
+		execRemoteSudoMethodName = "execRemoteSudo"
+		copyToRemoteSCPMethodName = "copyToRemoteSCP"
+		copyToRemoteSFTPMethodName = "copyToRemoteSFTP"
+		
 	}
