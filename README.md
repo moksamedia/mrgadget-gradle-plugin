@@ -68,3 +68,12 @@ The plugin injects a number of methods into your project.
 * copyToRemoteSCP() : copies a local file to a remote server using SCP. A full path to a local file (localFile) and remote file (remoteFile) must be specified, such as copyToRemoteSCP(localFile:'/path/to/some/file.jar', remoteFile:'path/on/remote/server/file_deployed.jar')
 
 * copyToRemoteSFTP() : the same as copyToRemoteSCP but uses the SFTP protocol instead of the SCP protocol.
+
+* closeMrGadgetSession() : if multiple commands are going to be executed on the same server successively, the session can be left open to avoid having to reconnect for each command by passing in the param leaveSessionOpen:true. If this is done, the session must be closed manually using this method once all actions have finished.
+
+* clearMrGadgetPasswords() : MrGadget can optionally store passwords for user and host login and sudo in an encrypted format in the user preferences. USE THIS FEATURE AT YOUR OWN RISK. NO GUARANTEE IS MADE REGARDING ITS SECURITY OR SAFETY. This command will erase all encrypted passwords from the system preferences and reset the encryption key (if an auto-generated key was used).
+
+* getMrGadget() : returns the MrGadget instance, if any, currently initialized.
+
+# Configuration / Params
+
