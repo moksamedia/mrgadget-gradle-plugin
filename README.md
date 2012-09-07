@@ -81,14 +81,14 @@ The plugin injects a number of methods into your project.
 
 MrGadget can be configured via an extension block in your buildscript. These values are passed in to the MrGadget instance on the execution of every command; however, any values explicitly sent in with the method invocation will override values set in the extension block.
 
-mrgadget {
+	mrgadget {
 
-	user = 'someUser'  // the username used to log into the server
-	host = '123.23.1.15'  // the ip address of host of the remote server
+		user = 'someUser'  // the username used to log into the server
+		host = '123.23.1.15'  // the ip address of host of the remote server
 	
-	prefsEncryptionKey = "some-random-chars"// optional: string key used to encrypt any stored passwords
-	password = "mypass" // optional: can directly pass in the password, if you like
-	sudoPassword = "mySudoPass" // optional: // if sudo password is different than login password, can pass it in also
+		prefsEncryptionKey = "some-random-chars"// optional: string key used to encrypt any stored passwords
+		password = "mypass" // optional: can directly pass in the password, if you like
+		sudoPassword = "mySudoPass" // optional: // if sudo password is different than login password, can pass it in also
 
-	logProgressGranularity = 20 // optional: use this to set the frequency, in percentage, that MrGadget log.info's file transfer progress (less = more reporting, value should be an integer between 0 and 100)
-}
+		logProgressGranularity = 20 // optional: use this to set the frequency, in percentage, that MrGadget log.info's file transfer progress (less = more reporting, value should be an integer between 0 and 100)
+	}
