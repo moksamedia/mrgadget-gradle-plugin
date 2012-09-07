@@ -9,6 +9,23 @@ apply plugin: MrGadgetPlugin
 
 buildscript {
 	
+		repositories {
+			mavenCentral()
+			add(new org.apache.ivy.plugins.resolver.URLResolver()) {
+				name = 'mrgadget-plugin'
+				basePath = 'https://raw.github.com/moksamedia/mrgadget/master/repo'
+				addArtifactPattern "${basePath}/[organization]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
+			}
+		}
+	
+	  dependencies {
+		classpath 'com_moksamedia:mrgadget:0.2.1:jar-with-dependencies'
+	  }
+	
+	}
+/*
+buildscript {
+	
 	repositories {
 		mavenCentral()
 	}
@@ -18,7 +35,7 @@ buildscript {
 	}
 	
 }
-
+*/
 
 dependencies {
 	compile gradleApi()
