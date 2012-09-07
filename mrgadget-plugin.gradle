@@ -6,7 +6,7 @@ import com.moksamedia.mrgadget.MrGadget;
 apply plugin: 'groovy'
 apply plugin: MrGadgetPlugin
 
-/*
+
 buildscript {
 	
 	repositories {
@@ -18,7 +18,7 @@ buildscript {
 	}
 	
 }
-*/
+
 
 dependencies {
 	compile gradleApi()
