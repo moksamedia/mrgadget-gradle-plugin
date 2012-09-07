@@ -16,12 +16,19 @@ buildscript {
 dependencies {
     compile gradleApi() ext { fatJarExclude = true }
     groovy localGroovy() ext { fatJarExclude = true }
-	compile 'com.moksamedia:mrgadget:0.2.2:jar-with-dependencies'
+	compile 'com_moksamedia:mrgadget:0.2.2:jar-with-dependencies'  // *** don't forget about the stupid underscore instad of '.'
+																   //     in the group name when using GitHub
 }
 
 repositories {
 	mavenCentral()
+	add(new org.apache.ivy.plugins.resolver.URLResolver()) {
+		name = 'mrgadget'
+		basePath = 'https://raw.github.com/moksamedia/MrGadget/master/repo'
+		addArtifactPattern "${basePath}/[organization]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
+	}
 }
+
 
 fatJar {
 	classifier 'jar-with-dependencies'
