@@ -123,3 +123,70 @@ MrGadget can be configured via an extension block in your buildscript. These val
 		copyToRemoteSFTPMethodName = "copyToRemoteSFTP"
 		
 	}
+	
+# Example Usage
+
+	/*
+	 * Simplest case. User and host are passed in with command. Sesson will be closed upon
+	 * completion. MrGadget will prompt for password.
+	 */
+
+	task doit << {
+
+		execRemote(user:'myusername', host:'www.howdy.com', command:'ls -al')
+
+	}
+
+
+	/*
+	 * Slightly less simple case. User and host are set in configuration block. They will
+	 * be used for all commands in script unless changed or overridden.
+	 */
+
+	mrgadget {
+		user: 'myusername'
+		host: 'www.howdy.com'
+	}
+
+	task doit2 << {
+	
+			execRemote(command:'ls -al')
+		
+			// can override settings made in config block (for this call only)
+			execRemote(user:'adifferentuser', host:'newhost.org', command:'rm somefile.txt') 
+	
+	}
+
+
+	/*
+	 * Executing multple commands without reconnecting.
+	 */
+	
+	mrgadget {
+		user = 'andrewhughes'
+		host = 'www.thepathis.com'
+		strictHostKeyChecking = false
+		showProgressDialog = false  // don't show the progress dialog box
+	}
+
+	task deployRemote << {
+	
+		initMrGadget(leaveSessionOpen:true)
+
+		logger.info "SENDING FILE"
+		copyToRemoteSFTP(localFile:"$rootDir/build/libs/myproj.war", remoteFile:"/webapps/myproj_released.war")
+	
+		logger.info "SETTING OWNER OF WAR"
+		execRemoteSudo("chown tomcat6:tomcat6 /webapps/myproj_released.war")
+	
+		logger.info "SETTING PERMISSION OF WAR"
+		execRemoteSudo("chmod 775 /webapps/myproj_released.war")
+	
+		logger.info "RESTARTING TOMCAT"
+		execRemoteSudo("service tomcat6 restart")
+			
+		logger.info "FINISHED"
+		closeMrGadgetSession()
+	
+	}
+		
