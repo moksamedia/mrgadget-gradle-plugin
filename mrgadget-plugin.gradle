@@ -6,6 +6,8 @@ import org.gradle.api.Project;
 apply plugin: 'groovy'
 apply plugin: MrGadgetPlugin
 
+project.ext.mrGadgetVersion = "0.2.3"
+
 buildscript {
 
 	repositories {
@@ -17,7 +19,7 @@ buildscript {
 	}
 
 	dependencies {
-		classpath "com_moksamedia:mrgadget:0.2.3:jar-with-dependencies"
+		classpath "com_moksamedia:mrgadget:${project.ext.mrGadgetVersion}:jar-with-dependencies"
 	}
 
 }
