@@ -15,7 +15,7 @@ buildscript {
 	}
 
 	dependencies {
-		classpath "com_moksamedia:mrgadget:${project.ext.containsProperty('mrGadgetVersion') ? project.ext.mrGadgetVersion : "MR_GADGET_VERSION"}:jar-with-dependencies"
+		classpath "com_moksamedia:mrgadget:${project.ext.hasProperty('mrGadgetVersion') ? project.ext.mrGadgetVersion : "MR_GADGET_VERSION"}:jar-with-dependencies"
 	}
 
 }
