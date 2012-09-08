@@ -63,9 +63,17 @@ else if (build_location == 'GITHUB') {
 
 }
 
+jar {
+	manifest {
+		attributes("Implementation-Title": "MrGadget Gradle Plugin", "Implementation-Version": version, "MrGadgetVersion":project.ext.mrGadgetVersion)
+	}
+}
 
 fatJar {
 	classifier 'jar-with-dependencies'
+	manifest {
+		attributes("Implementation-Title": "MrGadget Gradle Plugin", "Implementation-Version": version, "MrGadgetVersion":project.ext.mrGadgetVersion)
+	}
 }
 
 task generateApplyFromPlugin {
