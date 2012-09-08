@@ -24,10 +24,11 @@ class MrGadgetPlugin implements Plugin<Project> {
 
 		project.metaClass."$project.extensions.mrgadget.execRemoteMethodName" = { def params = [:] ->
 			
+			// if we pass in a string
 			if (params instanceof String) {
 				
 				if (mrg==null) {
-					initMrGadget()
+					initMrGadget() // init with params defined in extension
 				}
 				
 				mrg.execRemoteSudo(params)

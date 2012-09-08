@@ -7,7 +7,6 @@ apply plugin: MrGadgetPlugin
 buildscript {
 
 		repositories {
-			mavenCentral()
 			add(new org.apache.ivy.plugins.resolver.URLResolver()) {
 				name = 'mrgadget-plugin'
 				basePath = 'https://raw.github.com/moksamedia/mrgadget/master/repo'
