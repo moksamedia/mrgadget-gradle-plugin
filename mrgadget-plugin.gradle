@@ -11,7 +11,6 @@ apply plugin: MrGadgetPlugin
 buildscript {
 
 		repositories {
-			mavenCentral()
 			add(new org.apache.ivy.plugins.resolver.URLResolver()) {
 				name = 'mrgadget-plugin'
 				basePath = 'https://raw.github.com/moksamedia/mrgadget/master/repo'
@@ -57,29 +56,50 @@ class MrGadgetPlugin implements Plugin<Project> {
 		}
 
 		project.metaClass."$project.extensions.mrgadget.execRemoteMethodName" = { def params = [:] ->
-			if (mrg==null) initMrGadget(params)
-			else mrg.setParams(params)
 			
+			// if we pass in a string
 			if (params instanceof String) {
-				params = [command:params]
+				
+				if (mrg==null) {
+					initMrGadget() // init with params defined in extension
+				}
+				
+				mrg.execRemoteSudo(params)
+			}
+			else {
+
+				if (mrg==null) initMrGadget(params)
+				else mrg.setParams(params)
+				
+				assert params.command != null
+				
+				mrg.execRemote(params.command)
+				
 			}
 			
-			String command = params.command
-			assert command != null
-			mrg.execRemote(command)
 		}
 
 		project.metaClass."$project.extensions.mrgadget.execRemoteSudoMethodName" = { def params = [:] ->
-			if (mrg==null) initMrGadget(params)
-			else mrg.setParams(params)
 			
 			if (params instanceof String) {
-				params = [command:params]
+				
+				if (mrg==null) {
+					initMrGadget()
+				}
+				
+				mrg.execRemoteSudo(params)
 			}
+			else {
 
-			String command = params.command
-			assert command != null
-			mrg.execRemote(command)
+				if (mrg==null) initMrGadget(params)
+				else mrg.setParams(params)
+				
+				assert params.command != null
+				
+				mrg.execRemoteSudo(params.command)
+				
+			}
+			
 		}
 
 		project.metaClass."$project.extensions.mrgadget.copyToRemoteSCPMethodName" = { def params = [:] ->
