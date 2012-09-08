@@ -8,17 +8,17 @@ apply plugin: MrGadgetPlugin
 
 buildscript {
 
-		repositories {
-			add(new org.apache.ivy.plugins.resolver.URLResolver()) {
-				name = 'mrgadget-plugin'
-				basePath = 'https://raw.github.com/moksamedia/mrgadget/master/repo'
-				addArtifactPattern "${basePath}/[organization]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
-			}
+	repositories {
+		add(new org.apache.ivy.plugins.resolver.URLResolver()) {
+			name = 'mrgadget-plugin'
+			basePath = 'https://raw.github.com/moksamedia/mrgadget/master/repo'
+			addArtifactPattern "${basePath}/[organization]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
 		}
+	}
 
-	  dependencies {
+	dependencies {
 		classpath "com_moksamedia:mrgadget:0.2.3:jar-with-dependencies"
-	  }
+	}
 
 }
 
