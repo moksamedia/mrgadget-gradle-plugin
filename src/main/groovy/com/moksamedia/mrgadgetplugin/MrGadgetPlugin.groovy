@@ -4,6 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import com.moksamedia.mrgadget.MrGadget
 
+
 class MrGadgetPlugin implements Plugin<Project> {
 
 	MrGadget mrg
@@ -22,19 +23,49 @@ class MrGadgetPlugin implements Plugin<Project> {
 		}
 
 		project.metaClass."$project.extensions.mrgadget.execRemoteMethodName" = { def params = [:] ->
-			if (mrg==null) initMrGadget(params)
-			else mrg.setParams(params)
-			String command = params.command
-			assert command != null
-			mrg.execRemote(command)
+			
+			if (params instanceof String) {
+				
+				if (mrg==null) {
+					initMrGadget()
+				}
+				
+				mrg.execRemoteSudo(params)
+			}
+			else {
+
+				if (mrg==null) initMrGadget(params)
+				else mrg.setParams(params)
+				
+				assert params.command != null
+				
+				mrg.execRemote(params.command)
+				
+			}
+			
 		}
 
 		project.metaClass."$project.extensions.mrgadget.execRemoteSudoMethodName" = { def params = [:] ->
-			if (mrg==null) initMrGadget(params)
-			else mrg.setParams(params)
-			String command = params.command
-			assert command != null
-			mrg.execRemote(command)
+			
+			if (params instanceof String) {
+				
+				if (mrg==null) {
+					initMrGadget()
+				}
+				
+				mrg.execRemoteSudo(params)
+			}
+			else {
+
+				if (mrg==null) initMrGadget(params)
+				else mrg.setParams(params)
+				
+				assert params.command != null
+				
+				mrg.execRemoteSudo(params.command)
+				
+			}
+			
 		}
 
 		project.metaClass."$project.extensions.mrgadget.copyToRemoteSCPMethodName" = { def params = [:] ->
@@ -49,6 +80,12 @@ class MrGadgetPlugin implements Plugin<Project> {
 			mrg.copyToRemoteSFTP([localFile:params.localFile, remoteFile:params.remoteFile])
 		}
 
+		project.metaClass."$project.extensions.mrgadget.copyToRemoteRSYNCMethodName" = { def params = [:] ->
+			if (mrg==null) initMrGadget(params)
+			else mrg.setParams(params)
+			mrg.copyToRemoteRSYNC(params)
+		}
+		
 		project.metaClass.closeMrGadgetSession = {
 			mrg?.closeSession()
 		}
@@ -57,7 +94,7 @@ class MrGadgetPlugin implements Plugin<Project> {
 			if (mrg==null) initMrGadget(clearAllPasswords:true)
 			else mrg.clearAllPasswords()
 		}
-		
+
 		project.metaClass.getMrGadget = {
 			mrg
 		}
@@ -65,7 +102,7 @@ class MrGadgetPlugin implements Plugin<Project> {
 	}
 
 }
-	
+
 class MrGadgetPluginExtension {
 
 	def String user
@@ -74,7 +111,7 @@ class MrGadgetPluginExtension {
 	def String prefEncryptionKey = null
 	def String password = null
 	def String sudoPassword = null
-	
+
 	def int logProgressGranularity = 10
 
 	def boolean leaveSessionOpen = false
@@ -88,4 +125,5 @@ class MrGadgetPluginExtension {
 	def String execRemoteSudoMethodName = "execRemoteSudo"
 	def String copyToRemoteSCPMethodName = "copyToRemoteSCP"
 	def String copyToRemoteSFTPMethodName = "copyToRemoteSFTP"
+	def String copyToRemoteRSYNCMethodName = "copyToRemoteRSYNC"
 }
