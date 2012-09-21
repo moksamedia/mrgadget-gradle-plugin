@@ -34,7 +34,7 @@ class MrGadgetPlugin implements Plugin<Project> {
 			else mrg.setParams(params)
 			String command = params.command
 			assert command != null
-			mrg.execRemote(command)
+			mrg.execRemoteSudo(command)
 		}
 
 		project.metaClass."$project.extensions.mrgadget.copyToRemoteSCPMethodName" = { def params = [:] ->
