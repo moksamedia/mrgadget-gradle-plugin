@@ -1,0 +1,32 @@
+import org.gradle.api.Plugin;
+import org.gradle.api.Project;
+
+apply plugin: 'groovy'
+apply plugin: MrGadgetPlugin
+
+buildscript {
+
+	repositories {
+		add(new org.apache.ivy.plugins.resolver.URLResolver()) {
+			name = 'mrgadget-plugin'
+			basePath = 'https://raw.github.com/moksamedia/mrgadget/master/repo'
+			addArtifactPattern "${basePath}/[organization]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
+		}
+	}
+
+	dependencies {
+		classpath "com_moksamedia:mrgadget:${project.ext.hasProperty('mrGadgetVersion') ? project.ext.mrGadgetVersion : "MR_GADGET_VERSION"}:jar-with-dependencies"
+	}
+
+}
+
+dependencies {
+	compile gradleApi()
+	groovy localGroovy()
+}
+
+repositories {
+	mavenCentral()
+}
+
+
