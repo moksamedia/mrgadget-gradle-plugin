@@ -2,9 +2,9 @@ apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'fatjar'
 
-version='0.1.1'
+version='0.1.2'
 
-ext.mrGadgetVersion = '0.2.3'
+ext.mrGadgetVersion = '0.2.4'
 
 println "Using MrGadget version $mrGadgetVersion"
 
