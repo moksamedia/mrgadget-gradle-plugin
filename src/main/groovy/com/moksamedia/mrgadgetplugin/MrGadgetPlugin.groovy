@@ -31,7 +31,7 @@ class MrGadgetPlugin implements Plugin<Project> {
 					initMrGadget() // init with params defined in extension
 				}
 				
-				mrg.execRemote([command:params])
+				mrg.execRemote(params)
 			}
 			else {
 
@@ -53,7 +53,7 @@ class MrGadgetPlugin implements Plugin<Project> {
 					initMrGadget()
 				}
 				
-				mrg.execRemoteSudo([command:params])
+				mrg.execRemoteSudo(params)
 			}
 			else {
 
