@@ -1,22 +1,22 @@
 apply plugin: 'groovy'
-apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'eclipse'
+apply plugin: 'fatjar'
 
-version='0.1.3'
+version='0.1.2'
 
-ext.mrGadgetVersion = '0.3.0'
+ext.mrGadgetVersion = '0.2.4'
 
 println "Using MrGadget version $mrGadgetVersion"
 
 String build_location = 'LOCAL'
 
 buildscript {
-    repositories {
-        jcenter()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
-    }
+	dependencies {
+		classpath 'eu.appsatori:gradle-fatjar-plugin:0.1.2' // adds fatJar task
+	}
+	repositories {
+		mavenCentral()
+	}
 }
 
 if (build_location == 'LOCAL') {
@@ -24,7 +24,8 @@ if (build_location == 'LOCAL') {
 	println "USING LOCAL"
 	
 	dependencies {
-		compile gradleApi()
+		compile gradleApi() ext { fatJarExclude = true }
+		groovy localGroovy() ext { fatJarExclude = true }
 		compile "com.moksamedia:mrgadget:$project.ext.mrGadgetVersion:jar-with-dependencies"  // *** don't forget about the stupid underscore instad of '.'
 		//     in the group name when using GitHub
 	}
@@ -43,21 +44,20 @@ else if (build_location == 'GITHUB') {
 	println "USING GITHUB"
 	
 	dependencies {
-		compile gradleApi()
+		compile gradleApi() ext { fatJarExclude = true }
+		groovy localGroovy() ext { fatJarExclude = true }
 		compile 'com_moksamedia:mrgadget:$project.ext.mrGadgetVersion:jar-with-dependencies'  // *** don't forget about the stupid underscore instad of '.'
 		//     in the group name when using GitHub
 	}
 
 	repositories {
 		mavenCentral()
-	
-        ivy {
-            url = 'https://raw.github.com/moksamedia/mrgadget/master/repo'
-            name = 'mrgadget-plugin'
-            layout 'pattern' , {
-                artifact "[organization]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
-            }
-        }
+		
+		 add(new org.apache.ivy.plugins.resolver.URLResolver()) {
+		 name = 'mrgadget'
+		 basePath = 'https://raw.github.com/moksamedia/MrGadget/master/repo'
+		 addArtifactPattern "${basePath}/[organization]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
+		 }
 
 	}
 
@@ -69,15 +69,11 @@ jar {
 	}
 }
 
-shadowJar {
+fatJar {
 	classifier 'jar-with-dependencies'
 	manifest {
 		attributes("Implementation-Title": "MrGadget Gradle Plugin", "Implementation-Version": version, "MrGadgetVersion":project.ext.mrGadgetVersion)
 	}
-    dependencies {
-        exclude('org.codehaus.groovy:groovy:.*')
-        exclude('org.slf4j:slf4j-simple:.*')
-    }
 }
 
 task generateApplyFromPlugin {
@@ -120,8 +116,8 @@ build << {
 		into("$projectDir/repo/com_moksamedia/mrgadget-plugin/$version")
 	}
 	copy {
-		println "Copying ${shadowJar.archiveName} to $projectDir/repo/com_moksamedia/mrgadget-plugin/$version"
-		from("$buildDir/libs/${shadowJar.archiveName}")
+		println "Copying ${fatJar.archiveName} to $projectDir/repo/com_moksamedia/mrgadget-plugin/$version"
+		from("$buildDir/libs/${fatJar.archiveName}")
 		into("$projectDir/repo/com_moksamedia/mrgadget-plugin/$version")
 	}
 	
@@ -130,8 +126,7 @@ build << {
 /*
  * REQUIRED FOR OSS SONATYPE AND MAVEN CENTRAL DEPLOYMENT
  */
- 
-/*
+
 apply plugin: 'maven'
 apply plugin: 'signing'
 
@@ -198,4 +193,3 @@ uploadArchives {
 		}
 	}
 }
-*/

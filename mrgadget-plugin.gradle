@@ -8,29 +8,30 @@ apply plugin: MrGadgetPlugin
 
 buildscript {
 
-	repositories {
-		add(new org.apache.ivy.plugins.resolver.URLResolver()) {
-			name = 'mrgadget-plugin'
-			basePath = 'https://raw.github.com/moksamedia/mrgadget/master/repo'
-			addArtifactPattern "${basePath}/[organization]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
-		}
-	}
+    repositories {
 
-	dependencies {
-		classpath "com_moksamedia:mrgadget:${project.ext.hasProperty('mrGadgetVersion') ? project.ext.mrGadgetVersion : "0.2.4"}:jar-with-dependencies"
-	}
+        ivy {
+            url = 'https://raw.github.com/moksamedia/mrgadget/master/repo'
+            name = 'mrgadget-plugin'
+            layout 'pattern' , {
+                artifact "[organization]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"
+            }
+        }
+    }
+
+    dependencies {
+        classpath "com_moksamedia:mrgadget:${project.ext.hasProperty('mrGadgetVersion') ? project.ext.mrGadgetVersion : "0.3.0"}:jar-with-dependencies"
+    }
 
 }
 
 dependencies {
-	compile gradleApi()
-	groovy localGroovy()
+    compile gradleApi()
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
-
 
 
 
@@ -145,6 +146,7 @@ class MrGadgetPluginExtension {
 	def String prefEncryptionKey = null
 	def String password = null
 	def String sudoPassword = null
+	def String privateKey = null
 
 	def int logProgressGranularity = 10
 

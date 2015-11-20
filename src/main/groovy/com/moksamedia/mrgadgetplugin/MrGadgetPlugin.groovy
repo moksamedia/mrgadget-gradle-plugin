@@ -111,6 +111,7 @@ class MrGadgetPluginExtension {
 	def String prefEncryptionKey = null
 	def String password = null
 	def String sudoPassword = null
+	def String privateKey = null
 
 	def int logProgressGranularity = 10
 
