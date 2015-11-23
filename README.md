@@ -94,6 +94,7 @@ MrGadget can be configured via an extension block in your buildscript. These val
 		prefsEncryptionKey = "some-random-chars"// string key used to encrypt any stored passwords
 		password = "mypass" // can directly pass in the password, if you like
 		sudoPassword = "mySudoPass" // if sudo password is different than login password, can pass it in also
+		privateKey = "/some/path/to/key.pem/ // can use private key auth instead of password auth
 
 		logProgressGranularity = 10 // use this to set the frequency, in percentage, that MrGadget log.info's file transfer
 								    // progress (less = more reporting, value should be an integer between 0 and 100)
