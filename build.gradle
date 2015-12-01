@@ -1,7 +1,7 @@
 apply plugin: 'groovy'
 apply plugin: 'com.github.johnrengelman.shadow'
 
-version='0.1.4'
+version='0.1.5'
 
 ext.mrGadgetVersion = '0.3.1'
 
@@ -66,6 +66,10 @@ else if (build_location == 'GITHUB') {
 jar {
 	manifest {
 		attributes("Implementation-Title": "MrGadget Gradle Plugin", "Implementation-Version": version, "MrGadgetVersion":project.ext.mrGadgetVersion)
+	}
+	dependencies {
+		exclude('org.codehaus.groovy:groovy:.*')
+		exclude('org.slf4j:slf4j-simple:.*')
 	}
 }
 
