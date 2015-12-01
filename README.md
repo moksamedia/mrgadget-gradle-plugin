@@ -6,9 +6,7 @@ Passwords can be passed in as parameters. If they are not, MrGadget will use the
 
 # Installation
 
-The plugin can be used in a couple ways.
-
-First, the 'mrgadget-plugin.gradle' file can be applied directly:
+The 'mrgadget-plugin.gradle' file can be applied directly:
 
 	apply from: 'https://raw.github.com/moksamedia/mrgadget-gradle-plugin/master/mrgadget-plugin.gradle'
 	
