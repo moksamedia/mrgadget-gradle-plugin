@@ -26,8 +26,7 @@ buildscript {
 }
 
 dependencies {
-	compile localGroovy()
-	compile gradleApi()
+    compile gradleApi()
 }
 
 repositories {
