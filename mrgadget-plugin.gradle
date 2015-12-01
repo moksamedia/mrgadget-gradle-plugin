@@ -25,15 +25,6 @@ buildscript {
 
 }
 
-dependencies {
-    compile gradleApi()
-}
-
-repositories {
-    mavenCentral()
-}
-
-
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

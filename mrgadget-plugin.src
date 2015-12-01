@@ -22,12 +22,3 @@ buildscript {
     }
 
 }
-
-dependencies {
-    compile gradleApi()
-}
-
-repositories {
-    mavenCentral()
-}
-
