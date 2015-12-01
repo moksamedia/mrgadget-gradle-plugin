@@ -9,3 +9,4 @@ bin/
 *.ipr
 *.iws
 gradle.properties
+.idea/

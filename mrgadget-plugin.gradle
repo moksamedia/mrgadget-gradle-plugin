@@ -20,13 +20,14 @@ buildscript {
     }
 
     dependencies {
-        classpath "com_moksamedia:mrgadget:${project.ext.hasProperty('mrGadgetVersion') ? project.ext.mrGadgetVersion : "0.3.0"}:jar-with-dependencies"
+        classpath "com_moksamedia:mrgadget:${project.ext.hasProperty('mrGadgetVersion') ? project.ext.mrGadgetVersion : "0.3.1"}:jar-with-dependencies"
     }
 
 }
 
 dependencies {
-    compile gradleApi()
+	compile localGroovy()
+	compile gradleApi()
 }
 
 repositories {
